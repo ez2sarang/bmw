@@ -1,0 +1,76 @@
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+        "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+    <!-- Abstract root definition -->
+    <!-- base -->
+    <definition name="mobile" template="/WEB-INF/views/common/tiles/mainLayout.jsp">
+        <put-attribute name="title" value="IMPD"/>
+        <!--<put-attribute name="header" value="/WEB-INF/views/common/components/header.jsp"/>-->
+        <!--<put-attribute name="menu" value="/WEB-INF/views/common/components/left_menu.jsp"/>-->
+        <put-attribute name="body" value=""/>
+        <!-- put-attribute name="footer" value="/WEB-INF/views/common/components/footer.jsp" / -->
+    </definition>
+    <definition name="admin" template="/WEB-INF/views/common/tiles/adminLayout.jsp">
+        <put-attribute name="title" value="IMPD Administrator"/>
+        <put-attribute name="header" value="/WEB-INF/views/admin/components/header.jsp"/>
+        <put-attribute name="top_menu" value="/WEB-INF/views/admin/components/top_menu.jsp"/>
+        <put-attribute name="side_menu" value="/WEB-INF/views/admin/components/side_menu.jsp"/>
+        <put-attribute name="body" value=""/>
+        <put-attribute name="footer" value="/WEB-INF/views/admin/components/footer.jsp" />
+    </definition>
+
+    <!-- admin -->
+    <definition name="*/signin_main" extends="admin">
+        <put-attribute name="header" value=""/>
+        <put-attribute name="side_menu" value=""/>
+        <put-attribute name="top_menu" value=""/>
+        <put-attribute name="body" value="/WEB-INF/views/admin/private/signin.jsp"/>
+        <put-attribute name="footer" value="" />
+    </definition>
+    <definition name="*/signup_main" extends="admin">
+        <put-attribute name="header" value=""/>
+        <put-attribute name="side_menu" value=""/>
+        <put-attribute name="top_menu" value=""/>
+        <put-attribute name="body" value="/WEB-INF/views/admin/private/signup.jsp"/>
+        <put-attribute name="footer" value="" />
+    </definition>
+    <definition name="*/*_main" extends="admin">
+        <put-attribute name="body" value="/WEB-INF/views/admin/{1}/{2}_main.jsp"/>
+    </definition>
+    <definition name="*/*_info" template="/WEB-INF/views/common/tiles/divLayout.jsp">
+        <put-attribute name="title" value="IMPD"/>
+        <put-attribute name="body" value="/WEB-INF/views/admin/{1}/{2}.jsp"/>
+    </definition>
+    <definition name="admin/*_html" template="/WEB-INF/views/common/tiles/infoLayout.jsp">
+        <put-attribute name="title" value="IMPD"/>
+        <put-attribute name="body" value="/WEB-INF/views/admin/{1}.html"/>
+    </definition>
+
+    <!-- mobile -->
+    <definition name="*_main" extends="mobile">
+        <put-attribute name="body" value="/WEB-INF/views/{1}.jsp"/>
+    </definition>
+    <!--<definition name="/*_info" template="/WEB-INF/views/common/tiles/infoLayout.jsp">
+        <put-attribute name="title" value="IMPD"/>
+        <put-attribute name="body" value="/WEB-INF/views/{1}.jsp"/>
+    </definition>-->
+    <definition name="/*_html" template="/WEB-INF/views/common/tiles/infoLayout.jsp">
+        <put-attribute name="title" value="IMPD"/>
+        <put-attribute name="body" value="/WEB-INF/views/{1}.html"/>
+    </definition>
+
+    <!-- json -->
+    <definition name="json" template="/WEB-INF/views/common/tiles/jsonLayout.jsp">
+    </definition>
+
+    <!-- xml -->
+    <definition name="xml" template="/WEB-INF/views/common/tiles/xmlLayout.jsp">
+        <put-attribute name="body" value="/WEB-INF/views/{1}.jsp"/>
+    </definition>
+
+    <!-- excel -->
+    <definition name="xls" template="/WEB-INF/views/common/tiles/excelLayout.jsp">
+        <put-attribute name="body" value="/WEB-INF/views/{1}.jsp"/>
+    </definition>
+</tiles-definitions>

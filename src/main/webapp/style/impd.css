@@ -1,0 +1,307 @@
+.up-progress { position:relative; width:400px; border: 1px solid #ddd; padding: 1px; border-radius: 3px; }
+.bar { background-color: #B4F5B4; width:0%; height:20px; border-radius: 3px; }
+.percent { position:absolute; display:inline-block; top:3px; left:48%; }
+
+/* dropzone */
+.dz-browser-not-supported .dz-message {
+    display: none !important;
+}
+.dz-browser-not-supported.dropzone-box {
+    min-height: auto !important;
+    border: none !important;
+    border-radius: 0 !important;
+    width: auto !important;
+    cursor: default !important;
+    padding: 0 !important;
+    -webkit-transition: none;
+    transition: none;
+}
+.dropzone-box {
+    position: relative;
+    min-height: 284px;
+    border: 3px dashed #ddd;
+    border-radius: 3px;
+    vertical-align: middle;
+    width: 100%;
+    cursor: pointer;
+    padding: 0 15px 15px 0;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+}
+.dz-default.dz-message {
+    color: #555555;
+    font-size: 20px;
+    font-weight: 600;
+    display: block;
+    min-height: 70px;
+    width: 300px;
+    position: absolute;
+    padding-left: 90px;
+    padding-top: 12px;
+    line-height: 22px;
+    top: 50%;
+    margin-top: -35px;
+    left: 50%;
+    margin-left: -150px;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+}
+.dz-text-small {
+    font-size: 14px;
+    font-weight: 400;
+}
+.dropzone-box .glyphicon.glyphicon-cloud-upload {
+    display: block;
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    text-align: center;
+    line-height: 70px;
+    font-size: 32px;
+    background: #eee;
+    color: #aaa;
+    border-radius: 2px;
+    -webkit-transition: all 0.2s;
+    transition: all 0.2s;
+}
+.dropzone-box:hover .glyphicon.glyphicon-cloud-upload {
+    color: #1d89cf;
+}
+.dz-started .dz-default.dz-message {
+    display: none;
+}
+.dz-started:hover .glyphicon.glyphicon-cloud-upload {
+    background: #eee !important;
+    color: #aaa !important;
+}
+.dz-preview {
+    width: 160px;
+    padding: 6px 10px 10px 10px;
+    margin: 15px 0 0 15px;
+    display: inline-block;
+    cursor: default;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    vertical-align: top;
+}
+.dz-filename {
+    color: #555555;
+    overflow: hidden;
+    padding-bottom: 2px;
+}
+.dz-size {
+    padding-bottom: 8px;
+}
+.dz-thumbnail {
+    width: 138px;
+    height: 120px;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    overflow: hidden;
+}
+.dz-thumbnail > img {
+    max-width: 100%;
+    max-height: 120px;
+}
+.dz-preview .progress,
+.dz-preview .progess-bar {
+    height: 8px;
+}
+.dz-preview .progress {
+    margin: 8px 0 0 0;
+}
+.dz-size {
+    font-style: italic;
+    color: #aaa;
+    font-size: 11px;
+}
+.dz-size span {
+    font-weight: 600;
+}
+.dz-remove {
+    line-height: 30px;
+    display: block;
+    margin: 8px -11px -11px -11px;
+    text-align: center;
+    color: #666;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid transparent;
+    font-weight: 600;
+    font-size: 10px;
+    text-transform: uppercase;
+    -webkit-transition: all 0.1s;
+    transition: all 0.1s;
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;
+}
+.dz-remove:hover {
+    background: #e66454;
+    color: #fff;
+    border-top-color: transparent;
+    text-decoration: none;
+}
+.dz-thumbnail-wrapper {
+    margin: 0 -10px;
+    padding: 10px;
+    background: #f2f2f2;
+    border: 1px solid #ddd;
+    border-left: none;
+    border-right: none;
+    position: relative;
+}
+.dz-nopreview {
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 600;
+    color: #888;
+}
+.dz-thumbnail img[src] + .dz-nopreview {
+    display: none;
+}
+.dz-error-mark,
+.dz-success-mark,
+.dz-error-message {
+    display: none;
+    position: absolute;
+    left: -1px;
+    right: -1px;
+    top: -1px;
+    bottom: -1px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1) inset;
+    -webkit-transition: all 0.1s;
+    transition: all 0.1s;
+}
+.dz-error-mark .fa,
+.dz-success-mark .fa {
+    line-height: 140px;
+    font-size: 50px;
+    color: #fff;
+    font-weight: 400;
+}
+.dz-error-mark .fa {
+    color: #fa6b59;
+}
+.dz-success-mark .fa {
+    color: #9ed441;
+}
+.dz-error-message {
+    color: #fff;
+    font-weight: 600;
+    padding: 20px 10px 0 10px;
+}
+.dz-error .dz-error-mark {
+    display: block;
+}
+.dz-error .dz-error-message {
+    display: none;
+}
+.dz-error:hover .dz-error-mark {
+    display: none;
+}
+.dz-error:hover .dz-error-message {
+    display: block;
+}
+.dz-success .dz-success-mark {
+    display: block;
+}
+
+/* progress bar */
+@-webkit-keyframes progress-bar-stripes {
+    from {
+        background-position: 40px 0;
+    }
+    to {
+        background-position: 0 0;
+    }
+}
+@keyframes progress-bar-stripes {
+    from {
+        background-position: 40px 0;
+    }
+    to {
+        background-position: 0 0;
+    }
+}
+.progress {
+    overflow: hidden;
+    height: 18px;
+    margin-bottom: 18px;
+    background-color: #f5f5f5;
+    border-radius: 2px;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+.progress-bar {
+    float: left;
+    width: 0%;
+    height: 100%;
+    font-size: 12px;
+    line-height: 18px;
+    color: #ffffff;
+    text-align: center;
+    background-color: #428bca;
+    -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    -webkit-transition: width 0.6s ease;
+    transition: width 0.6s ease;
+}
+.progress-striped .progress-bar {
+    background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-size: 40px 40px;
+}
+.progress.active .progress-bar {
+    -webkit-animation: progress-bar-stripes 2s linear infinite;
+    animation: progress-bar-stripes 2s linear infinite;
+}
+.progress-bar-success {
+    background-color: #5cb85c;
+}
+.progress-striped .progress-bar-success {
+    background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+}
+.progress-bar-info {
+    background-color: #5bc0de;
+}
+.progress-striped .progress-bar-info {
+    background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+}
+.progress-bar-warning {
+    background-color: #f0ad4e;
+}
+.progress-striped .progress-bar-warning {
+    background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+}
+.progress-bar-danger {
+    background-color: #d9534f;
+}
+.progress-striped .progress-bar-danger {
+    background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+    background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+}
+
+.flex-caption {
+    width: 100%;
+    padding: 2%;
+    left: 0;
+    bottom: 0;
+    background: rgba(0,0,0,.5);
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.3);
+    font-size: 14px;
+    line-height: 18px;
+}
+.impd-error-class {
+    color:#FF0000;  /* red */
+}
+.impd-valid-class {
+    color:#00CC00; /* green */
+}
