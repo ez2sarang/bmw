@@ -1,7 +1,7 @@
 package org.mariapresso.impd.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.mariapresso.impd.bean.communicate.Join;
 import org.mariapresso.impd.bean.entity.User;
 import org.mariapresso.impd.constant.Pages;

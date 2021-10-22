@@ -4,7 +4,7 @@ import kr.co.fcsoft.core.bean.DataTableObject;
 import kr.co.fcsoft.core.bean.datatables.QueryModel;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.mariapresso.impd.bean.communicate.Group;
 import org.mariapresso.impd.bean.communicate.Join;
 import org.mariapresso.impd.bean.entity.User;

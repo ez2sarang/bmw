@@ -8,8 +8,10 @@ import org.springframework.core.env.Environment;
 import org.springframework.core.io.UrlResource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
-import org.springframework.orm.hibernate4.HibernateTransactionManager;
-import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
@@ -75,7 +77,7 @@ public class RootConfig {
      * If request parameter "targetUrl" is existed, then forward to this url
      * For update login form
      *
-     * @param targetUrl
+     * @param
      * @return
      */
     /*@Bean(name = "savedRequestAwareAuthenticationSuccessHandler")

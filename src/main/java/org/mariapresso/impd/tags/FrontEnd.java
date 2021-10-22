@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.beanutils.PropertyUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.mariapresso.impd.annotation.ActionType;
 import org.mariapresso.impd.annotation.ModelType;
 import org.mariapresso.impd.annotation.bean.Component;

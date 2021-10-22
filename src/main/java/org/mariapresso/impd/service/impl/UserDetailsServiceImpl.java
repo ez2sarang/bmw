@@ -1,6 +1,6 @@
 package org.mariapresso.impd.service.impl;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.mariapresso.impd.bean.communicate.UserApi;
 import org.mariapresso.impd.bean.entity.User;
 import org.mariapresso.impd.constant.ResultType;

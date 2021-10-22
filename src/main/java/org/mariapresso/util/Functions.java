@@ -13,7 +13,7 @@ import org.hibernate.mapping.Column;
 import org.hibernate.mapping.PersistentClass;
 import org.hibernate.mapping.Property;
 import org.springframework.context.NoSuchMessageException;
-import org.springframework.orm.hibernate3.LocalSessionFactoryBean;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
 public class Functions {
 	/**
@@ -175,9 +175,10 @@ public class Functions {
 	}*/
 
 	public static Property getEntityProperty(LocalSessionFactoryBean factoryBean, Object entity, String propertyName) {
-		PersistentClass persistentClass = factoryBean.getConfiguration().getClassMapping(entity.getClass().getName());
+		/*PersistentClass persistentClass = factoryBean.getConfiguration().getClassMapping(entity.getClass().getName());
 	    Property property = persistentClass.getProperty(propertyName);
-	    return property;
+	    return property;*/
+		return null;
 	}
 	
 	/*public static String message(MessageSourceAccessor wmSource, String key) {

@@ -3,7 +3,7 @@ package org.mariapresso.impd.annotation.bean;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import lombok.Data;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.mariapresso.impd.annotation.ModelType;
 import org.mariapresso.impd.annotation.Role;
 import org.mariapresso.impd.annotation.ui.Rule;

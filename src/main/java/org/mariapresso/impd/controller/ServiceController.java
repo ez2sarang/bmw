@@ -9,7 +9,7 @@ import org.apache.commons.fileupload.disk.DiskFileItem;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.mariapresso.config.RootConfig;
 import org.mariapresso.impd.bean.communicate.*;
 import org.mariapresso.impd.bean.entity.ContentGroup;

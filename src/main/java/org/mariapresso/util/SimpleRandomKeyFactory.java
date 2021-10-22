@@ -1,6 +1,6 @@
 package org.mariapresso.util;
 
-import org.apache.commons.lang.RandomStringUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 
 /**
  * Created by ez2sarang on 15. 5. 12..
