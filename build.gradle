@@ -1,63 +1,20 @@
+plugins {
+    id 'java'
+    id 'war'
+    id 'java-library'
+    id "org.jetbrains.gradle.plugin.idea-ext" version "1.0.1"
+}
+
 group 'kr.co.fcsoft'
 version '1.0-SNAPSHOT'
-
-apply plugin: 'java'
-apply plugin: 'war'
-apply plugin: 'idea'
-//apply plugin: 'tomcat'
-//apply plugin: "io.spring.dependency-management"
-
-Map warMap = [
-        'bmw-war': 'bmw'
-]
 
 sourceCompatibility = 1.8
 ext.jpaMetamodelGeneratedDir = "$buildDir/jpa2"
 
-
-/*buildscript {
-    repositories {
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-    }
-    dependencies {
-        classpath "io.spring.gradle:dependency-management-plugin:1.0.2.RELEASE"
-    }
-}*/
-/*
-buildscript {
-    repositories {
-        maven { url 'http://repo.spring.io/plugins-release' }
-    }
-    dependencies {
-        classpath 'org.springframework.build.gradle:propdeps-plugin:0.0.6'
-    }
-}
-
-configure(allprojects) {
-    apply plugin: 'propdeps'
-    apply plugin: 'propdeps-maven'
-    apply plugin: 'propdeps-idea'
-    apply plugin: 'propdeps-eclipse'
-//    configurations.default.exclude(group: 'javax.jms', module: 'jms')
-}
-apply plugin: "propdeps"
-configurations.compile.transitive = false
-configurations.provided.transitive = false
-configurations.optional.transitive = false
-*/
-
-/*dependencyManagement {
-    imports {
-        mavenBom 'org.springframework.data:spring-data-releasetrain:Ingalls-SR1'
-    }
-}*/
-
-
 configurations {
     jpaMetamodelGen {
-        extendsFrom compile
+        //delete compile
+        extendsFrom
     }
 
     all*.exclude group: 'javax.jms', module: 'jms'
@@ -74,285 +31,147 @@ configurations {
 }
 
 repositories {
-    mavenCentral()
+    mavenCentral artifactUrls:
+            ["https://repo.maven.apache.org/maven2/"
+                                ,"http://repo.spring.io/release"
+                                ,"http://repository.jboss.org/nexus/content/groups/public"
+                                ,"http://maven.springframework.org/release/"
+            ]
     // and optionally...
-    maven { url "http://repo.spring.io/release" }
+    /*maven { url "http://repo.spring.io/release" }
     maven { url 'http://repository.jboss.org/nexus/content/groups/public' }
-    maven { url 'http://maven.springframework.org/release/' }
+    maven { url 'http://maven.springframework.org/release/' }*/
 }
-
-// Spring Framework:
-def springVersion = '4.2.2.RELEASE'
-def springContext = "org.springframework:spring-context:${springVersion}"
-def springMVC     = "org.springframework:spring-webmvc:${springVersion}"
-def springAOP     = "org.springframework:spring-aop:${springVersion}"
-def springORM     = "org.springframework:spring-orm:${springVersion}"
-def springJDBC    = "org.springframework:spring-jdbc:${springVersion}"
-def springTest    = "org.springframework:spring-test:${springVersion}"
-def springDataJpa = "org.springframework.data:spring-data-commons-core:1.4.1.RELEASE"
-
-
-// Spring Security:
-def springSecurityVersion = '4.0.1.RELEASE'
-def springSecurityCore    = "org.springframework.security:spring-security-core:${springSecurityVersion}"
-def springSecurityLDAP    = "org.springframework.security:spring-security-ldap:${springSecurityVersion}"
-def springSecurityConfig  = "org.springframework.security:spring-security-config:${springSecurityVersion}"
-def springSecurityWeb     = "org.springframework.security:spring-security-web:${springSecurityVersion}"
-def springSecurityTaglibs = "org.springframework.security:spring-security-taglibs:${springSecurityVersion}"
-def springSecurityACL     = "org.springframework.security:spring-security-acl:${springSecurityVersion}"
-
-
-// Tiles: 2.2.2, 3.0.5
-def tilesVersion = '3.0.7'
-def tilesAPI     = "org.apache.tiles:tiles-api:${tilesVersion}"
-def tilesCore    = "org.apache.tiles:tiles-core:${tilesVersion}"
-def tilesServlet = "org.apache.tiles:tiles-servlet:${tilesVersion}"
-def tilesJSP     = "org.apache.tiles:tiles-jsp:${tilesVersion}"
-def tilesCompat  = "org.apache.tiles:tiles-compat:${tilesVersion}"
-
-
-// AspectJ:
-def aspectJVersion = '1.6.9'
-def aspectJ        = "org.aspectj:aspectjrt:${aspectJVersion}"
-
-
-// Databases:
-def apacheDerbyVersion = '10.9.1.0'
-def apacheDerby        = "org.apache.derby:derbyclient:${apacheDerbyVersion}"
-
-def mySQLVersion = '5.1.36'
-def mySQL        = "mysql:mysql-connector-java:${mySQLVersion}"
-
-def postgreSQLVersion = '9.1-901.jdbc4'
-def postgreSQL        = "postgresql:postgresql:${postgreSQLVersion}"
-
-
-// Logging:
-def slf4jVersion = '1.7.12'
-def slf4jAPI     = "org.slf4j:slf4j-api:${slf4jVersion}"
-def slf4jJCL     = "org.slf4j:jcl-over-slf4j:${slf4jVersion}"
-def slf4jLog4J   = "org.slf4j:slf4j-log4j12:${slf4jVersion}"
-
-def log4JVersion = '2.3'
-def log4JAPI     = "org.apache.logging.log4j:log4j-api:${log4JVersion}"
-def log4JCore    = "org.apache.logging.log4j:log4j-core:${log4JVersion}"
-
-// Javax:
-def javaxServletAPIVersion = '3.1.0'
-def javaxServletAPI        = "javax.servlet:javax.servlet-api:${javaxServletAPIVersion}"
-
-def javaxJspApiVersion     = '2.2'
-def javaxJspApi            = "javax.servlet.jsp:jsp-api:${javaxJspApiVersion}"
-
-def javaxJSTLVersion       = '1.2'
-def javaxJSTL              = "javax.servlet:jstl:${javaxJSTLVersion}"
-
-def javaxInjectVersion     = '1'
-def javaxInject            = "javax.inject:javax.inject:${javaxInjectVersion}"
-
-def javaxValidationVersion = '1.1.0.Final'
-def javaxValidation        = "javax.validation:validation-api:${javaxValidationVersion}"
-
-
-// Hibernate:
-def hibernateCoreVersion        = '4.3.10.Final'
-def hibernateCore               = "org.hibernate:hibernate-core:${hibernateCoreVersion}"
-
-def hibernateValidatorVersion   = '5.1.3.Final'//error in '4.3.2.Final'
-def hibernateValidator          = "org.hibernate:hibernate-validator:${hibernateValidatorVersion}"
-
-def hibernateJPAVersion         = '1.0.0.Final'
-def hibernateJPA                = "org.hibernate.javax.persistence:hibernate-jpa-2.1-api:${hibernateJPAVersion}"
-
-def hibernateJPAModelgenVersion = '4.3.10.Final'
-def hibernateJPAModelgen        = "org.hibernate:hibernate-jpamodelgen:1.2.0.Final:${hibernateJPAModelgenVersion}"
-
-
-// dom4j:
-def dom4JVersion = '1.6.1'
-def dom4J        = "dom4j:dom4j:${dom4JVersion}"
-
-
-// antlr:
-def antlrVersion = '2.7.7'
-def antlr        = "antlr:antlr:${antlrVersion}"
-
-
-// commons:
-def commonsBeanUtilsVersion   = '1.9.2'
-def commonsBeanUtils          = "commons-beanutils:commons-beanutils:${commonsBeanUtilsVersion}"
-
-def commonsCollectionsVersion = '3.2.1'
-def commonsCollections        = "commons-collections:commons-collections:${commonsCollectionsVersion}"
-
-def commonsDigesterVersion    = '2.1'
-def commonsDigester           = "commons-digester:commons-digester:${commonsDigesterVersion}"
-
-def commonsFileUploadVersion  = '1.3.1'
-def commonsFileUpload         = "commons-fileupload:commons-fileupload:${commonsFileUploadVersion}"
-
-def commonsIOVersion          = '2.4'
-def commonsIO                 = "commons-io:commons-io:${commonsIOVersion}"
-
-def commonsLangVersion        = '2.6'
-def commonsLang               = "commons-lang:commons-lang:${commonsLangVersion}"
-
-def commonsLoggingVersion     = '1.2'
-def commonsLogging            = "commons-logging:commons-logging:${commonsLoggingVersion}"
-
-//DBCP
-def commonsDBCPVersion        = '2.1'
-def commonsDBCP               = "org.apache.commons:commons-dbcp2:${commonsDBCPVersion}"
-
-//JUnit4
-def jUnitVersion = '4.12'
-def jUnit        = "junit:junit:${jUnitVersion}"
-
-//lombok
-def lombokVersion = '1.16.10'
-def lombok        = "org.projectlombok:lombok:${lombokVersion}"
-
-//JSON
-def jacksonCoreVersion = '2.5.4'
-def jacksonCore        = "com.fasterxml.jackson.core:jackson-core:${jacksonCoreVersion}"
-def jacksonAnnotations = "com.fasterxml.jackson.core:jackson-annotations:${jacksonCoreVersion}"
-def jacksonDatabind    = "com.fasterxml.jackson.core:jackson-databind:${jacksonCoreVersion}"
-
-//
-def reflectionsVersion = '0.9.10'
-def reflections        = "org.reflections:reflections:${reflectionsVersion}"
-
-def googleGuavaVersion = '18.0'
-def googleGuava        = "com.google.guava:guava:${googleGuavaVersion}"
 
 dependencies {
-    // Spring Framework:
-    compile(springContext) {
-        exclude group: 'commons-logging', module: 'commons-logging'
-    }
-    compile(
-            springMVC,    springAOP,    springORM,     springJDBC,  springTest, springDataJpa
-    )
+    implementation "org.apache.commons:commons-dbcp2:${commonsDBCPVersion}"
+    implementation "org.hibernate:hibernate-core:${hibernateCoreVersion}"
+    implementation "org.hibernate:hibernate-validator:${hibernateValidatorVersion}"
+    implementation "org.hibernate.javax.persistence:hibernate-jpa-2.1-api:${hibernateJPAVersion}"
+    jpaMetamodelGen "org.hibernate:hibernate-jpamodelgen:${hibernateJPAModelgenVersion}"
+    implementation "org.springframework:spring-context:${springVersion}"
+    implementation "org.springframework:spring-webmvc:${springVersion}"
+    implementation "org.springframework:spring-aop:${springVersion}"
+    implementation "org.springframework:spring-orm:${springVersion}"
+    implementation "org.springframework:spring-jdbc:${springVersion}"
+    implementation "org.springframework:spring-test:${springVersion}"
+    implementation 'org.springframework.data:spring-data-commons:2.3.6.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-autoconfigure:2.3.7.RELEASE'
+    implementation 'org.springframework.boot:spring-boot-starter-tomcat:2.3.7.RELEASE'
+    implementation "org.springframework.security:spring-security-core:${springSecurityVersion}"
+    implementation "org.springframework.security:spring-security-ldap:${springSecurityVersion}"
+    implementation "org.springframework.security:spring-security-config:${springSecurityVersion}"
+    implementation "org.springframework.security:spring-security-web:${springSecurityVersion}"
+    implementation "org.springframework.security:spring-security-taglibs:${springSecurityVersion}"
+    implementation "org.springframework.security:spring-security-acl:${springSecurityVersion}"
+    implementation "io.jsonwebtoken:jjwt:${jwtVersion}"
+    implementation "org.apache.tiles:tiles-api:${tilesVersion}"
+    implementation "org.apache.tiles:tiles-core:${tilesVersion}"
+    implementation "org.apache.tiles:tiles-servlet:${tilesVersion}"
+    implementation "org.apache.tiles:tiles-jsp:${tilesVersion}"
+    implementation "org.apache.tiles:tiles-compat:${tilesVersion}"
+    implementation "org.aspectj:aspectjrt:${aspectJVersion}"
+    implementation "org.apache.derby:derbyclient:${apacheDerbyVersion}"
+    implementation "mysql:mysql-connector-java:${mySQLVersion}"
+    implementation "org.postgresql:postgresql:${postgreSQLVersion}"
+    implementation "org.slf4j:slf4j-api:${slf4jVersion}"
+    implementation "org.slf4j:jcl-over-slf4j:${slf4jVersion}"
+    implementation "org.slf4j:slf4j-log4j12:${slf4jVersion}"
+    implementation "org.apache.logging.log4j:log4j-api:${log4JVersion}"
+    implementation "org.apache.logging.log4j:log4j-core:${log4JVersion}"
+    implementation "org.projectlombok:lombok:${lombokVersion}"
+    implementation "javax.servlet:javax.servlet-api:${javaxServletAPIVersion}"
+    implementation "javax.servlet.jsp:javax.servlet.jsp-api:${javaxJspApiVersion}"
+    implementation "javax.servlet:jstl:${javaxJSTLVersion}"
+    implementation "javax.inject:javax.inject:${javaxInjectVersion}"
+    implementation "javax.validation:validation-api:${javaxValidationVersion}"
+    implementation "org.dom4j:dom4j:${dom4JVersion}"
+    implementation "org.antlr:antlr4:${antlrVersion}"
+    implementation "commons-beanutils:commons-beanutils:${commonsBeanUtilsVersion}"
+    implementation "org.apache.commons:commons-collections4:${commonsCollectionsVersion}"
+    implementation "commons-digester:commons-digester:${commonsDigesterVersion}"
+    implementation "commons-fileupload:commons-fileupload:${commonsFileUploadVersion}"
+    implementation "commons-io:commons-io:${commonsIOVersion}"
+    implementation "org.apache.commons:commons-lang3:${commonsLangVersion}"
+    implementation "commons-logging:commons-logging:${commonsLoggingVersion}"
+    implementation "com.fasterxml.jackson.core:jackson-core:${jacksonCoreVersion}"
+    implementation "com.fasterxml.jackson.core:jackson-annotations:${jacksonCoreVersion}"
+    implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonCoreVersion}"
+    implementation "org.reflections:reflections:${reflectionsVersion}"
+    implementation "com.google.guava:guava:${googleGuavaVersion}"
+    implementation 'javax.mail:javax.mail-api:1.5.5'
+    implementation 'com.sun.mail:javax.mail:1.5.5'
+    implementation 'com.google.code.gson:gson:2.8.0'
+    implementation group: 'org.projectlombok', name: 'lombok', version: "${lombokVersion}"
+    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: "${lombokVersion}"
+    implementation 'pull-parser:pull-parser:2.1.10'
 
-    // Spring Security:
-    compile(
-            springSecurityCore,    springSecurityLDAP,        springSecurityConfig,
-            springSecurityWeb,    springSecurityTaglibs,    springSecurityACL
-    )
+    //just test
+    implementation 'net.jodah:expiringmap:0.5.10'
+    implementation group: 'io.springfox', name: 'springfox-swagger2', version: '3.0.0'
+    implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '3.0.0'
 
-    // Tiles:
-    compile(
-            tilesCore, tilesAPI, tilesJSP
-    )
 
-    // AspectJ:
-    compile(aspectJ)
+    //testCompile -> testImplementation
+    testImplementation group: 'junit', name: 'junit', version: '4.11'
+//    testcompile 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+//    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 
-    // Databases:
-    /*compile(
-            apacheDerby, mySQL, postgreSQL
-    )*/
-
-    // Logging:
-    compile(slf4jAPI)
-    runtime(
-            slf4jJCL, slf4jLog4J
-    )
-    /*runtime(log4J) {
-        exclude group: 'javax.mail',   module: 'mail'
-        exclude group: 'javax.jms',    module: 'jms'
-        exclude group: 'com.sun.jdmk', module: 'jmxtools'
-        exclude group: 'com.sun.jmx',  module: 'jmxri'
-    }*/
-
-    // Javax:
-    compile(
-            javaxInject,        javaxValidation,        javaxJSTL
-            , 'javax.mail:javax.mail-api:1.5.5', 'com.sun.mail:javax.mail:1.5.5'
-            , 'com.google.code.gson:gson:2.8.0'
-    )
-    providedCompile(
-            javaxServletAPI,    javaxJspApi, lombok
-    )
-
-    // Hibernate:
-    compile(
-            hibernateCore, hibernateValidator, hibernateJPA
-    )
-
-    // dom4j:
-    compile(dom4J)
-
-    // antlr:
-    compile(antlr)
-
-    // commons:
-    compile(
-            commonsBeanUtils,     commonsCollections,   commonsDigester,
-            commonsFileUpload,    commonsIO,            commonsLang,
-            commonsLogging,       commonsDBCP
-    )
-
-    //jackson
-    compile(
-            jacksonCore, jacksonAnnotations, jacksonDatabind
-    )
-
-    compile(
-            reflections, googleGuava
-    )
-
-    // JUnit:
-    /*testCompile(
-            jUnit
-    )*/
-
-    provided(
-//        lombok
-    )
-
-    jpaMetamodelGen(
-            hibernateJPAModelgen
-    )
-
-    /*warMap.each {
-        deploy project(":$it.key")
-    }*/
+//    provided group: 'org.projectlombok', name: 'lombok', version: '1.18.16'
 }
-
-/*ear {
-    deploymentDescriptor {
-        warMap.each {
-            webModule(it.key + '-' + project.version + ".war", it.value)
-        }
-    }
-}*/
 
 sourceSets {
     main {
         java {
-            srcDir 'src/main/java'
-            srcDir jpaMetamodelGeneratedDir
+            srcDirs = ['src/main/java']
+            srcDirs jpaMetamodelGeneratedDir
         }
         resources {
-            srcDir 'src/main/resources'
+            srcDirs 'src/main/resources'
         }
     }
     test {
         java {
-            srcDir 'src/test/java'
+            srcDirs = ['src/test/java']
         }
         resources {
-            srcDir 'src/test/resources'
+            srcDirs 'src/test/resources'
         }
     }
 }
 
 
+processResources() {
+    from sourceSets.main.java.srcDirs
+    //중복 처리 전략을 명시적으로 지정
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+//    duplicatesStrategy(exclude("**/*.java"))
+    //DuplicatesStrategy.INHERIT
+    //DuplicatesStrategy.EXCLUDE(['**/*.java'])
+    //duplicatesStrategy(EXCLUDE: ['**/*.java'])
+    exclude '**/*.java'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+task explodedWar(type: Copy) {
+    into "$buildDir/libs/exploded/${war.archiveFileName.get()}"
+    with war
+}
+war.dependsOn explodedWar
+
+idea {
+    module {
+        sourceDirs += file(jpaMetamodelGeneratedDir)
+    }
+}
+
 task generateJpaMetamodel(type: JavaCompile) {
 
     def targetDir = file(jpaMetamodelGeneratedDir)
-    def compiledDestinationDir = "${buildDir}/tmp/apt-jpa"
+    def compiledDestinationDir = "$buildDir/tmp/apt-jpa"
     doFirst {
         // 항상 대상 디렉토리를 먼저 비우고 시작해야 한다.
         delete(targetDir)
@@ -378,3 +197,50 @@ task generateJpaMetamodel(type: JavaCompile) {
                     "-processor", "org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor"         ]
     )
 }
+
+/**
+ plugins {
+ id 'org.springframework.boot' version '2.3.2.RELEASE'
+ id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+ id 'java'
+ }
+
+ group = 'com.jaenyeong'
+ version = '0.0.1-SNAPSHOT'
+ sourceCompatibility = '11'
+
+ repositories {
+ mavenCentral()
+ }
+
+ dependencies {
+ implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+ implementation 'org.springframework.boot:spring-boot-starter-web'
+ implementation 'junit:junit:4.12'
+ testImplementation('org.springframework.boot:spring-boot-starter-test') {
+ exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+ }
+
+ // Spring Security
+ implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security'
+
+ // Spring Data JPA
+ implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa'
+
+ // H2 Database
+ implementation group: 'com.h2database', name: 'h2', version: '1.4.200'
+
+ // Spring Security Test
+ testImplementation group: 'org.springframework.security', name: 'spring-security-test', version: '5.3.3.RELEASE'
+
+ // Thymeleaf extras SpringSecurity5
+ implementation group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5'
+
+ // Spring Security Data
+ implementation group: 'org.springframework.security', name: 'spring-security-data', version: '5.3.3.RELEASE'
+ }
+
+ test {
+ useJUnitPlatform()
+ }
+ */
