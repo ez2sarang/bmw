@@ -64,7 +64,7 @@ public class HibernateUtil {
 
     public static String getSql(Criteria criteria) {
         CriteriaImpl criteriaImpl = (CriteriaImpl) criteria;
-        SessionImplementor session = criteriaImpl.getSession();
+        SessionImplementor session = (SessionImplementor) criteriaImpl.getSession();
         SessionFactoryImplementor factory = session.getFactory();
         CriteriaQueryTranslator translator = new CriteriaQueryTranslator(
                 factory

@@ -1,10 +1,10 @@
 package org.mariapresso.impd.dao.impl;
 
+import kr.co.fcsoft.core.helper.HibernateUtil;
 import kr.co.fcsoft.core.orm.HibernateObjectDao;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.criterion.Restrictions;
-import org.mariapresso.impd.util.HibernateUtil;
 import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
