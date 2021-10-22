@@ -11,21 +11,26 @@
  */
 package kr.co.fcsoft.core.bean;
 
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.util.Assert;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.persistence.Transient;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Properties;
 
-import javax.persistence.Transient;
-
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-
-import java.util.*;
-import javax.mail.*;
-import javax.mail.internet.*;
-import javax.activation.*;
-
+/**
+ *
+ */
 public abstract class EntityObject implements Pageable, Cloneable, Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -39,7 +44,7 @@ public abstract class EntityObject implements Pageable, Cloneable, Serializable 
     private boolean pageable = false;
 
     @Transient
-    private Map<String, Object> conditionMap = new HashMap<String, Object>();
+    private final Map<String, Object> conditionMap = new HashMap<String, Object>();
 
     public Map<String, Object> getConditionMap() {
 //        sendMail();
@@ -87,7 +92,7 @@ public abstract class EntityObject implements Pageable, Cloneable, Serializable 
      * @see org.springframework.data.domain.Pageable#getOffset()
      */
     @Override
-    public int getOffset() {
+    public long getOffset() {
         return page * size;
     }
 
@@ -130,7 +135,7 @@ public abstract class EntityObject implements Pageable, Cloneable, Serializable 
      * @param properties
      */
     public void setPage(int page, int size, Sort.Direction direction, String... properties) {
-        setPage(page, size, new Sort(direction, properties));
+        setPage(page, size, Sort.by(direction, properties));
     }
 
     /**
@@ -151,6 +156,51 @@ public abstract class EntityObject implements Pageable, Cloneable, Serializable 
 
     public boolean isPageable() {
         return pageable;
+    }
+
+    @Override
+    public Optional<Pageable> toOptional() {
+        return isUnpaged() ? Optional.empty() : Optional.of(this);
+    }
+
+    @Override
+    public Pageable next() {
+        return null;
+    }
+
+    @Override
+    public Pageable previousOrFirst() {
+        //TODO version up implement method
+        return null;
+    }
+
+    @Override
+    public Pageable first() {
+        //TODO version up implement method
+        return null;
+    }
+
+    @Override
+    public boolean hasPrevious() {
+        //TODO version up implement method
+        return false;
+    }
+
+    @Override
+    public boolean isPaged() {
+        return true;
+    }
+
+    @Override
+    public boolean isUnpaged() {
+        return false;
+    }
+
+    @Override
+    public Sort getSortOr(Sort sort) {
+        Assert.notNull(sort, "Fallback Sort must not be null!");
+
+        return getSort().isSorted() ? getSort() : sort;
     }
 
     public void sendMail() {

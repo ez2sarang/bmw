@@ -2,7 +2,7 @@ package kr.co.fcsoft.core.bean.datatables;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -124,11 +124,11 @@ public class QueryModel {
                 }
             }
         }
-        return sortOrder.size()==0 ? null : new Sort(sortOrder);
+        return sortOrder.size()==0 ? null : Sort.by(sortOrder);
     }
 
     public Pageable getPageable() {
-        return new PageRequest(((getStart() + 1) / getLength()), getLength(), getSortOrder());
+        return PageRequest.of(((getStart() + 1) / getLength()), getLength(), getSortOrder());
     }
 }
 
